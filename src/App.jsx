@@ -5,18 +5,18 @@ import TaskCard from './components/TaskCard';
 import {
   getTodayText, getTomorrowText,
 } from './helpers/date.helper';
-import { dayLabel } from './models/general.model';
+import { daysLabel } from './models/general.model';
 
 function App() {
   const [todayList, setTodayList] = useState([]);
   const [tomorrowList, setTomorrowList] = useState([]);
 
   const [todayInfo, setTodayInfo] = useState({
-    dayLabel : dayLabel.today,
+    dayLabel : daysLabel.today,
     day      : getTodayText(),
   });
   const [tomorrowInfo, setTomorrowInfo] = useState({
-    dayLabel : dayLabel.tomorrow,
+    dayLabel : daysLabel.tomorrow,
     day      : getTomorrowText(),
   });
 
@@ -33,10 +33,10 @@ function App() {
 
   const handleCreateTask = (day, task) => {
     switch (day) {
-      case dayLabel.today:
+      case daysLabel.today:
         setTodayList([...todayList, task]);
         break;
-      case dayLabel.tomorrow:
+      case daysLabel.tomorrow:
         setTomorrowList([...tomorrowList, task]);
         break;
       default:
@@ -46,13 +46,13 @@ function App() {
 
   const handleUpdateTask = (day, task) => {
     switch (day) {
-      case dayLabel.today: {
+      case daysLabel.today: {
         const newListToday = [...todayList]
           .map((t) => ((t.id === task.id) ? { ...task } : { ...t }));
         setTodayList([...newListToday]);
         break;
       }
-      case dayLabel.tomorrow: {
+      case daysLabel.tomorrow: {
         const newListTomorrow = [...tomorrowList]
           .map((t) => ((t.id === task.id) ? { ...task } : { ...t }));
         setTomorrowList([...newListTomorrow]);
@@ -67,7 +67,7 @@ function App() {
 
   const handleMoveTask = (day, task) => {
     switch (day) {
-      case dayLabel.today: {
+      case daysLabel.today: {
         const [selectedTask] = [...todayList].filter((t) => t.id === task.id);
         const newListToday = [...todayList].filter((t) => t.id !== task.id);
         const newListTomorrow = [...tomorrowList, selectedTask];
@@ -75,7 +75,7 @@ function App() {
         setTomorrowList([...newListTomorrow]);
         break;
       }
-      case dayLabel.tomorrow: {
+      case daysLabel.tomorrow: {
         const [selectedTask] = [...tomorrowList].filter((t) => t.id === task.id);
         const newListTomorrow = [...tomorrowList].filter((t) => t.id !== task.id);
         const newListYesterday = [...todayList, selectedTask];
