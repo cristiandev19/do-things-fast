@@ -10,7 +10,7 @@ const useForm = (initialize = {}) => {
     });
   };
 
-  return [value, handleInputChange];
+  return [value, handleInputChange, setValue];
 };
 
 export default useForm;
