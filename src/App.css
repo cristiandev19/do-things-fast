@@ -4,6 +4,6 @@
 .container-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 5%;
+  grid-gap: 1%;
 }
 
